@@ -21,3 +21,25 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+$ npm create-react-app app-name-here
+$ cd app-name-here
+$npm install react-router-dom
+$ npm run start
+
+****src/index.js
+
+//***1 install "react-router-dom" to use {BrowserRouter}
+
+
+**** app.js
+
+//***2 declare and import PATHS src/utils/paths.js
+        add { Switch, Route }
+
+//**3 create and import components
+
+//***4 move App content to HomePage.js
+
+//***5 created backend rotten-api
