@@ -1,12 +1,10 @@
-import React from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import UpdatePassword from "../components/Profile/UpdatePassword";
 import UpdateProfile from "../components/Profile/UpdateProfile";
 
 export default function ProfilePage(props) {
-  const [displayUpdateProfile, setDisplayUpdateProfile] = React.useState(false);
-  const [displayUpdatePassword, setDisplayUpdatePassword] =
-    React.useState(false);
+  const [displayUpdateProfile, setDisplayUpdateProfile] = useState(false);
+  const [displayUpdatePassword, setDisplayUpdatePassword] = useState(false);
   const { user, authenticate } = props;
 
   function profileToggle() {
