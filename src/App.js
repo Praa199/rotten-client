@@ -10,6 +10,7 @@ import SignupPage from "./pages/SignupPage";
 import axios from "axios";
 import LoginPage from "./pages/Login.page";
 import ProfilePage from "./pages/ProfilePage";
+import ProtectedRoute from "./components/routing/ProtectedRoute";
 // because we need to get user data
 
 // fetch('http://locahost:5000/api', {
@@ -100,13 +101,29 @@ function App() {
             <SignupPage {...reactRouterProps} authenticate={authenticate} />
           )}
         />
-        <Route
+        <ProtectedRoute
+          // exact={true}
+          exact
+          path={PATHS.PROFILE_PAGE}
+          component={ProfilePage}
+          user={user}
+          isCool={false}
+          friendName="Tadej"
+        />
+
+        {/* <Route
           exact
           path={PATHS.PROFILE_PAGE}
           render={(reactRouterProps) => (
-            <ProfilePage {...reactRouterProps} user={user} />
+            <ProfilePage
+              {...reactRouterProps}
+              user={user}
+              isCool={false}
+              friendsName="Tadej"
+            />
           )}
-        />
+        /> */}
+
         <Route exact path={PATHS.MOVIES_PAGE} component={MoviesPage} />
         {/* <Route exact path="/movies/add" component={AddMoviePage}/> */}
         <Route exact path={PATHS.SINGLE_MOVIE} component={SingleMoviePage} />

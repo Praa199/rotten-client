@@ -3,6 +3,7 @@ import * as PATHS from "../utils/paths";
 import { Redirect } from "react-router-dom";
 
 export default function ProfilePage(props) {
+  console.log("props:", props);
   const { user } = props;
 
   if (!user) {
