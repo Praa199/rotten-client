@@ -73,11 +73,18 @@ function UpdateProfile(props) {
   function handleSubmit(e) {
     e.preventDefault();
     const accessToken = localStorage.getItem("accessToken");
-    axios.put(`http://localhost:5000/api/profile/update`, form, {
-      headers: {
-        authorization: accessToken,
-      },
-    });
+    axios
+      .put(`http://localhost:5000/api/profile/update`, form, {
+        headers: {
+          authorization: accessToken,
+        },
+      })
+      .then((response) => {
+        console.log("response:", response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   return (
