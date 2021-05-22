@@ -7,7 +7,6 @@ export default function ProfilePage(props) {
   const [displayUpdatePassword, setDisplayUpdatePassword] =
     React.useState(false);
   const { user } = props;
-  console.log("props:", props);
 
   function profileToggle() {
     setDisplayUpdateProfile(!displayUpdateProfile);
@@ -30,7 +29,7 @@ export default function ProfilePage(props) {
       <div>
         <button onClick={profileToggle}>Update profile</button>
         {/* {displayUpdateProfile ? <UpdateProfile /> : null} */}
-        {displayUpdateProfile && <UpdateProfile />}
+        {displayUpdateProfile && <UpdateProfile user={user} />}
         <br />
         <button onClick={passwordToggle}>Update Password</button>
         {displayUpdatePassword && <UpdatePassword />}
@@ -62,17 +61,71 @@ function UpdatePassword() {
 }
 
 function UpdateProfile(props) {
+  const { user } = props;
+  console.log("user:", user);
+  const [form, setForm] = React.useState({
+    username: user.username,
+    email: user.email,
+  });
+  console.log("form:", form);
+
+  function handleChange(event) {
+    setForm({ ...form, [event.target.name]: event.target.value });
+  }
+
   return (
     <form>
       <div>
         <label>Username</label>
-        <input name="username" placeholder="Username" />
+        <input
+          name="username"
+          placeholder="Username"
+          value={form.username}
+          onChange={handleChange}
+        />
       </div>
       <div>
         <label>Email</label>
-        <input name="email" placeholder="Email" />
+        <input
+          name="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handleChange}
+        />
       </div>
       <button>Update das profile</button>
     </form>
   );
+}
+
+function COmponent9() {
+  const arr = [1, "two", { three: 3 }, function four() {}];
+  return (
+    <div>
+      <Component1
+        hello="there"
+        cowbanga="teenage mutant ninja turtles"
+        specialSauce={arr}
+        whateverNameWePutHere="<3"
+        noice
+      />
+      <Component2 />
+      <Component3 />
+    </div>
+  );
+}
+
+function Component1(props) {
+  // props.hello;
+  // props.cowbanga;
+  // props.specialSauce
+  // props.whateverNameWePutHere
+  // props.noice -> true
+  return <div></div>;
+}
+function Component2() {
+  return <div></div>;
+}
+function Component3() {
+  return <div></div>;
 }
