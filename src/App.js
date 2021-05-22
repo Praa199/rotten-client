@@ -11,6 +11,7 @@ import axios from "axios";
 import LoginPage from "./pages/Login.page";
 import ProfilePage from "./pages/ProfilePage";
 import ProtectedRoute from "./components/routing/ProtectedRoute";
+import NormalRoute from "./components/routing/NormalRoute";
 // because we need to get user data
 
 // fetch('http://locahost:5000/api', {
@@ -40,6 +41,7 @@ import ProtectedRoute from "./components/routing/ProtectedRoute";
 
 function App() {
   const [user, setUser] = React.useState(null);
+  console.log("user:", user);
 
   React.useEffect(() => {
     const myAccessToken = localStorage.getItem("accessToken");
@@ -80,27 +82,33 @@ function App() {
       <Navbar user={user} logout={logout} />
       <Switch>
         {/* <Route exact path={PATHS.HOME_PAGE} component={HomePageComponent} /> */}
-        <Route
+        <NormalRoute
+          exact
+          path={PATHS.HOME_PAGE}
+          component={HomePageComponent}
+        />
+        {/* <Route
           exact
           path={PATHS.HOME_PAGE}
           render={(reactRouterProps) => (
             <HomePageComponent {...reactRouterProps} />
           )}
-        />
-        <Route
+        /> */}
+
+        <NormalRoute
           exact
           path={PATHS.LOGIN_PAGE}
-          render={(values) => {
-            return <LoginPage {...values} authenticate={authenticate} />;
-          }}
+          authenticate={authenticate}
+          component={LoginPage}
         />
-        <Route
+
+        <NormalRoute
           exact
-          path="/signup"
-          render={(reactRouterProps) => (
-            <SignupPage {...reactRouterProps} authenticate={authenticate} />
-          )}
+          path={PATHS.SIGNUP_PAGE}
+          authenticate={authenticate}
+          component={SignupPage}
         />
+
         <ProtectedRoute
           // exact={true}
           exact
@@ -124,9 +132,15 @@ function App() {
           )}
         /> */}
 
-        <Route exact path={PATHS.MOVIES_PAGE} component={MoviesPage} />
+        <NormalRoute exact path={PATHS.MOVIES_PAGE} component={MoviesPage} />
+        {/* <Route exact path={PATHS.MOVIES_PAGE} component={MoviesPage} /> */}
         {/* <Route exact path="/movies/add" component={AddMoviePage}/> */}
-        <Route exact path={PATHS.SINGLE_MOVIE} component={SingleMoviePage} />
+        <NormalRoute
+          exact
+          path={PATHS.SINGLE_MOVIE}
+          component={SingleMoviePage}
+        />
+        {/* <Route exact path={PATHS.SINGLE_MOVIE} component={SingleMoviePage} /> */}
         {/* <Route exact path="movies/:movieId/edit" component={EditSinglePage}/> */}
         {/* <Route exact path="/:username" component={SingleUserPage}/> */}
       </Switch>
