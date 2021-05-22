@@ -11,6 +11,9 @@ function Navbar(props) {
       {props.user ? (
         <div>
           <div>Hey {props.user.username}</div>
+          <div>
+            <Link to={PATHS.PROFILE_PAGE}>Profile</Link>
+          </div>
           <div onClick={props.logout}>Logout</div>
         </div>
       ) : (

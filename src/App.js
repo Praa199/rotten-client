@@ -9,6 +9,7 @@ import SingleMoviePage from "./pages/SingleMoviePage";
 import SignupPage from "./pages/SignupPage";
 import axios from "axios";
 import LoginPage from "./pages/Login.page";
+import ProfilePage from "./pages/ProfilePage";
 // because we need to get user data
 
 // fetch('http://locahost:5000/api', {
@@ -68,7 +69,7 @@ function App() {
     localStorage.removeItem("accessToken");
     return axios.delete(`http://localhost:5000/api/auth/logout`, {
       headers: {
-        Authorization: accessToken,
+        authorization: accessToken,
       },
     });
   }
@@ -99,7 +100,13 @@ function App() {
             <SignupPage {...reactRouterProps} authenticate={authenticate} />
           )}
         />
-        {/* <Route exact path="/profile" component={ProfilePage}/> */}
+        <Route
+          exact
+          path={PATHS.PROFILE_PAGE}
+          render={(reactRouterProps) => (
+            <ProfilePage {...reactRouterProps} user={user} />
+          )}
+        />
         <Route exact path={PATHS.MOVIES_PAGE} component={MoviesPage} />
         {/* <Route exact path="/movies/add" component={AddMoviePage}/> */}
         <Route exact path={PATHS.SINGLE_MOVIE} component={SingleMoviePage} />
