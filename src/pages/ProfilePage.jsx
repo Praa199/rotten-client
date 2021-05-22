@@ -1,6 +1,5 @@
 import React from "react";
-import * as PATHS from "../utils/paths";
-import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 export default function ProfilePage(props) {
   const [displayUpdateProfile, setDisplayUpdateProfile] = React.useState(false);
@@ -62,19 +61,27 @@ function UpdatePassword() {
 
 function UpdateProfile(props) {
   const { user } = props;
-  console.log("user:", user);
   const [form, setForm] = React.useState({
     username: user.username,
     email: user.email,
   });
-  console.log("form:", form);
 
   function handleChange(event) {
     setForm({ ...form, [event.target.name]: event.target.value });
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    const accessToken = localStorage.getItem("accessToken");
+    axios.put(`http://localhost:5000/api/profile/update`, form, {
+      headers: {
+        authorization: accessToken,
+      },
+    });
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <label>Username</label>
         <input
