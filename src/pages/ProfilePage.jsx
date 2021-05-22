@@ -5,7 +5,7 @@ export default function ProfilePage(props) {
   const [displayUpdateProfile, setDisplayUpdateProfile] = React.useState(false);
   const [displayUpdatePassword, setDisplayUpdatePassword] =
     React.useState(false);
-  const { user } = props;
+  const { user, authenticate } = props;
 
   function profileToggle() {
     setDisplayUpdateProfile(!displayUpdateProfile);
@@ -28,7 +28,9 @@ export default function ProfilePage(props) {
       <div>
         <button onClick={profileToggle}>Update profile</button>
         {/* {displayUpdateProfile ? <UpdateProfile /> : null} */}
-        {displayUpdateProfile && <UpdateProfile user={user} />}
+        {displayUpdateProfile && (
+          <UpdateProfile user={user} authenticate={authenticate} />
+        )}
         <br />
         <button onClick={passwordToggle}>Update Password</button>
         {displayUpdatePassword && <UpdatePassword />}
@@ -60,7 +62,7 @@ function UpdatePassword() {
 }
 
 function UpdateProfile(props) {
-  const { user } = props;
+  const { user, authenticate } = props;
   const [form, setForm] = React.useState({
     username: user.username,
     email: user.email,
@@ -81,6 +83,7 @@ function UpdateProfile(props) {
       })
       .then((response) => {
         console.log("response:", response);
+        authenticate(response.data.user);
       })
       .catch((err) => {
         console.error(err);

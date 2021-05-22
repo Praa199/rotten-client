@@ -118,6 +118,7 @@ function App() {
           user={user}
           isCool={isCool}
           friendName="Tadej"
+          authenticate={authenticate}
         />
 
         {/* <Route
