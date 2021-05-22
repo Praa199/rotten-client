@@ -1,5 +1,7 @@
-import axios from "axios";
 import React, { Component } from "react";
+import * as AUTH_SERVICE from "../service/auth.service";
+import * as CONSTS from "../utils/consts";
+import * as PATHS from "../utils/paths";
 
 class Login extends Component {
   state = {
@@ -22,15 +24,14 @@ class Login extends Component {
     //   systemOverrideThing()
     e.preventDefault();
 
-    axios
-      .post("http://localhost:5000/api/auth/login", this.state)
+    AUTH_SERVICE.LOGIN(this.state)
       .then((response) => {
         console.log("response:", response);
         //   response.data.accessToken // sessionId
 
-        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem(CONSTS.ACCESS_TOKEN, response.data.accessToken);
         this.props.authenticate(response.data.user);
-        this.props.history.push("/");
+        this.props.history.push(PATHS.HOME_PAGE);
       })
       .catch((err) => {
         console.error(err.response);

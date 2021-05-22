@@ -12,6 +12,8 @@ import LoginPage from "./pages/Login.page";
 import ProfilePage from "./pages/ProfilePage";
 import ProtectedRoute from "./components/routing/ProtectedRoute";
 import NormalRoute from "./components/routing/NormalRoute";
+import * as AUTH_SERVICE from "./service/auth.service";
+import * as CONSTS from "./utils/consts";
 // because we need to get user data
 
 // fetch('http://locahost:5000/api', {
@@ -41,20 +43,14 @@ import NormalRoute from "./components/routing/NormalRoute";
 
 function App() {
   const [user, setUser] = React.useState(null);
-  console.log("user:", user);
   const [isCool, setIsCool] = React.useState(true);
 
   React.useEffect(() => {
-    const myAccessToken = localStorage.getItem("accessToken");
+    const myAccessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
     if (!myAccessToken) {
       return;
     }
-    axios
-      .get("http://localhost:5000/api/auth/me", {
-        headers: {
-          Authorization: myAccessToken,
-        },
-      })
+    AUTH_SERVICE.GET_ME(myAccessToken)
       .then((response) => {
         setUser(response.data);
       })
@@ -68,14 +64,10 @@ function App() {
   }
 
   function logout() {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
     setUser(null);
-    localStorage.removeItem("accessToken");
-    return axios.delete(`http://localhost:5000/api/auth/logout`, {
-      headers: {
-        authorization: accessToken,
-      },
-    });
+    localStorage.removeItem(CONSTS.ACCESS_TOKEN);
+    return AUTH_SERVICE.LOGOUT(accessToken);
   }
 
   return (

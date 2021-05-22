@@ -1,5 +1,7 @@
 import React from "react";
-import axios from "axios";
+import * as AUTH_SERVICE from "../service/auth.service";
+import * as CONSTS from "../utils/consts";
+import * as PATHS from "../utils/paths";
 
 // GLOBAL STATE
 // React Context, Redux, Apollo (GraphQl)
@@ -16,17 +18,16 @@ function SignupPage(props) {
 
   function onSubmit(event) {
     event.preventDefault();
-    axios
-      .post("http://localhost:5000/api/auth/signup", form)
+    AUTH_SERVICE.SIGNUP(form)
       .then((response) => {
         console.log("response:", response);
         props.authenticate(response.data.user);
         // dear localStorage with JSON. thanks
         // dear json localStorage. thanks
         // dear json localStorage = thanks(lift State up. and Status as well, why not?)
-        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem(CONSTS.ACCESS_TOKEN, response.data.accessToken);
         // WE NEED TO MAKE SURE THE USER STAYS LOGGED IN. WE DONT HAVE COOKIES, BUT WE CAN USE ANOTHER KIND OF IN-BROWSER MEMORY
-        props.history.push("/");
+        props.history.push(PATHS.HOME_PAGE);
       })
       .catch((err) => {
         console.log("err:", err.response); // this is in axios errors
