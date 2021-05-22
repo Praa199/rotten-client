@@ -8,6 +8,7 @@ import MoviesPage from "./pages/MoviesPage";
 import Navbar from "./pages/Navbar.jsx";
 import AddMoviePage from "./pages/AddMoviePage.jsx";
 import SingleMoviePage from "./pages/SingleMoviePage.jsx";
+import SignupPage from "./pages/SignupPage.jsx";
 
 function App() {
   return (
@@ -16,10 +17,10 @@ function App() {
       <Switch>
         <Route exact path={PATHS.HOME_PAGE} component={HomePage} />
         {/* <Route exact path={PATHS.} component={LoginPage} /> */}
-        {/* <Route exact path={PATHS.} component={SignupPage} /> */}
+        <Route exact path={PATHS.SIGNUP_PAGE} component={SignupPage} />
         {/* <Route exact path={PATHS.} component={ProfilePage} /> */}
         <Route exact path={PATHS.MOVIES_PAGE} component={MoviesPage} />
-        <Route exact path={PATHS.ADD_MOVIES} component={AddMoviePage} />
+        {/* <Route exact path={PATHS.ADD_MOVIES} component={AddMoviePage} /> */}
         <Route exact path={PATHS.SINGLE_MOVIE} component={SingleMoviePage} />
         {/* <Route exact path={PATHS.} component={EditSinglePage} /> */}
         {/* <Route exact path={PATHS.} component={UserPage} /> */}

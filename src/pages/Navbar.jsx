@@ -5,8 +5,15 @@ import * as PATHS from "../utils/paths.js";
 function Navbar() {
   return (
     <div>
-      <Link to={PATHS.HOME_PAGE}>hOME</Link>
-      <Link to={PATHS.MOVIES_PAGE}>mOVIES</Link>
+      <div>
+        <Link to={PATHS.SIGNUP_PAGE}>signup</Link>
+      </div>
+      <div>
+        <Link to={PATHS.HOME_PAGE}>hOME</Link>
+      </div>
+      <div>
+        <Link to={PATHS.MOVIES_PAGE}>mOVIES</Link>
+      </div>
     </div>
   );
 }
