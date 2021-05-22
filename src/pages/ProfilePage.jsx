@@ -7,6 +7,7 @@ export default function ProfilePage(props) {
   const [displayUpdatePassword, setDisplayUpdatePassword] =
     React.useState(false);
   const { user } = props;
+  console.log("props:", props);
 
   function profileToggle() {
     setDisplayUpdateProfile(!displayUpdateProfile);
@@ -28,11 +29,50 @@ export default function ProfilePage(props) {
       />
       <div>
         <button onClick={profileToggle}>Update profile</button>
+        {/* {displayUpdateProfile ? <UpdateProfile /> : null} */}
+        {displayUpdateProfile && <UpdateProfile />}
         <br />
         <button onClick={passwordToggle}>Update Password</button>
+        {displayUpdatePassword && <UpdatePassword />}
         <br />
         <button>Delete Account</button>
       </div>
     </div>
+  );
+}
+
+function UpdatePassword() {
+  return (
+    <form>
+      <div>
+        <label>Current Password</label>
+        <input name="password" placeholder="Current Password" />
+      </div>
+      <div>
+        <label>New Password</label>
+        <input name="password" placeholder="New Password" />
+      </div>
+      <div>
+        <label>Confirm New Password</label>
+        <input name="password" placeholder="Confirm New Password" />
+      </div>
+      <button>Update das password</button>
+    </form>
+  );
+}
+
+function UpdateProfile(props) {
+  return (
+    <form>
+      <div>
+        <label>Username</label>
+        <input name="username" placeholder="Username" />
+      </div>
+      <div>
+        <label>Email</label>
+        <input name="email" placeholder="Email" />
+      </div>
+      <button>Update das profile</button>
+    </form>
   );
 }

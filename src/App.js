@@ -42,6 +42,7 @@ import NormalRoute from "./components/routing/NormalRoute";
 function App() {
   const [user, setUser] = React.useState(null);
   console.log("user:", user);
+  const [isCool, setIsCool] = React.useState(true);
 
   React.useEffect(() => {
     const myAccessToken = localStorage.getItem("accessToken");
@@ -115,7 +116,7 @@ function App() {
           path={PATHS.PROFILE_PAGE}
           component={ProfilePage}
           user={user}
-          isCool={false}
+          isCool={isCool}
           friendName="Tadej"
         />
 
